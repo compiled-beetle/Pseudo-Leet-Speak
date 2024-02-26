@@ -89,30 +89,25 @@ program.on('--help', () => {
 
 program.parse(process.argv);
 
-const { level, encode, decode, string } = program.opts();
+const { encode, decode, string } = program.opts();
 
-if (!level || (!encode && !decode) || !string) {
+if ((!encode && !decode) || !string) {
     console.error('invalid command. provide correct the arguments.');
     console.log(helpInfo);
 } else {
     if ((encode && decode) || (!encode && !decode)) {
         console.error('invalid command. Please provide either -e, --encode or -d, --decode.');
-        console.log(helpInfo);
-    } else {
-        if (!['basic', 'intermediate', 'advanced', 'expert'].includes(level.toLowerCase())) {
-            console.error('invalid level. provide ("basic", "intermediate", "advanced", or "expert")');
             console.log(helpInfo);
         } else {
             if (encode) {
-                const encodedString = encodeLeet(string, level);
+            const encodedString = encodeLeet(string);
                 console.log('string:  ', string);
                 console.log('encoded: ', encodedString);
             }
             if (decode) {
-                const decodedString = decodeLeet(string, level);
+            const decodedString = decodeLeet(string);
                 console.log('string:  ', string);
                 console.log('decoded: ', decodedString);
-            }
         }
     }
 }
