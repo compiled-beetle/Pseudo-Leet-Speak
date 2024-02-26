@@ -7,37 +7,38 @@ const { program } = require('commander');
  */
 const leetAlphabet = {
     a: '4',
+    b: '8',
     c: '©',
     d: '|)',
     e: '3',
+    f: 'ƒ',
     g: '9',
     h: '#',
     i: '!',
     j: '_]',
     k: '|<',
     l: '1',
+    m: '^^',
     n: 'ท',
     o: 'Ø',
     p: '|^',
     q: '&',
+    r: '®',
     s: '5',
     t: '†',
+    u: 'µ',
     v: '|/',
     w: 'v²',
     x: '><',
-    z: '2',
-    m: '^^',
-    f: 'ƒ',
-    b: '8',
-    r: '®',
     y: '¥',
-    u: 'µ'
+    z: '2'
 };
 
 /**
  * Leet numbers mapping for encoding and decoding.
  */
 const leetNumbers = {
+    0: 'O',
     1: 'I',
     2: 'Z',
     3: 'E',
@@ -46,8 +47,7 @@ const leetNumbers = {
     6: 'G',
     7: 'T',
     8: 'B',
-    9: 'Q',
-    0: 'O'
+    9: 'Q'
 };
 
 program.name('Leet-Speak-CLI').description('CLI tool to encode and decode Pseudo-Leet-Speak').version('0.0.1');
@@ -58,7 +58,25 @@ program.name('Leet-Speak-CLI').description('CLI tool to encode and decode Pseudo
  * @returns {string} The encoded string.
  */
 const encodeLeet = (string) => {
-    // todo: implement the encoding logic
+    const trimmedString = string.trim().toLocaleLowerCase().split('');
+    let encodedString = '';
+
+    for (let char of trimmedString) {
+        let key = Object.keys(leetAlphabet).find((key) => key === char);
+        if (key) {
+            encodedString += leetAlphabet[key];
+            continue;
+        }
+
+        key = Object.keys(leetNumbers).find((key) => key === char);
+        if (key) {
+            encodedString += leetNumbers[key];
+            continue;
+        }
+
+        encodedString += char;
+    }
+
     return encodedString;
 };
 
@@ -68,7 +86,35 @@ const encodeLeet = (string) => {
  * @returns {string} The decoded string.
  */
 const decodeLeet = (string) => {
-    // todo: implement the decoding logic
+    const trimmedString = string.trim().split('');
+    let decodedString = '';
+    let skipNext = false;
+
+    for (let index = 0; index < trimmedString.length; index++) {
+        if (skipNext) {
+            skipNext = false;
+            continue;
+        }
+
+        let char = trimmedString[index];
+        let twoChar = char + (trimmedString[index + 1] || '');
+
+        let key = Object.keys(leetAlphabet).find((key) => leetAlphabet[key] === char || leetAlphabet[key] === twoChar);
+        if (key) {
+            decodedString += key;
+            if (leetAlphabet[key] === twoChar) skipNext = true;
+            continue;
+        }
+
+        key = Object.keys(leetNumbers).find((key) => leetNumbers[key] === char);
+        if (key) {
+            decodedString += key;
+            continue;
+        }
+
+        decodedString += char;
+    }
+
     return decodedString;
 };
 
@@ -97,17 +143,17 @@ if ((!encode && !decode) || !string) {
 } else {
     if ((encode && decode) || (!encode && !decode)) {
         console.error('invalid command. Please provide either -e, --encode or -d, --decode.');
-            console.log(helpInfo);
-        } else {
-            if (encode) {
+        console.log(helpInfo);
+    } else {
+        if (encode) {
             const encodedString = encodeLeet(string);
-                console.log('string:  ', string);
-                console.log('encoded: ', encodedString);
-            }
-            if (decode) {
+            console.log('string:  ', string);
+            console.log('encoded: ', encodedString);
+        }
+        if (decode) {
             const decodedString = decodeLeet(string);
-                console.log('string:  ', string);
-                console.log('decoded: ', decodedString);
+            console.log('string:  ', string);
+            console.log('decoded: ', decodedString);
         }
     }
 }
