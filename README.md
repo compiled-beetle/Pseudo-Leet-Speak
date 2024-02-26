@@ -32,3 +32,29 @@ npm start -- -d -s "<leet_string>"
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Panagram Test
+
+Encoding:
+
+```bash
+npm start -- -e -s "the quick brown fox jumps over the lazy dog."
+```
+
+Output:
+
+```plaintext
+†#3 &µ!©|< 8®Øv²ท ƒØ>< _]µ^^|^5 Ø|/3® †#3 142¥ |)Ø9.
+```
+
+Decoding:
+
+```bash
+npm start -- -d -s "†#3 &µ!©|< 8®Øv²ท ƒØ>< _]µ^^|^5 Ø|/3® †#3 142¥ |)Ø9."
+```
+
+Output:
+
+```plaintext
+the quick brown fox jumps over the lazy dog.
+```
