@@ -6,51 +6,24 @@ const { program } = require('commander');
  * Leet alphabet mapping for encoding and decoding.
  */
 const leetAlphabet = {
-    a: '4',
-    b: '8',
-    c: '©',
-    d: '|)',
-    e: '3',
-    f: 'ƒ',
-    g: '9',
-    h: '#',
-    i: '!',
-    j: '_]',
-    k: '|<',
-    l: '1',
-    m: '^^',
-    n: 'ท',
-    o: 'Ø',
-    p: '|^',
-    q: '&',
-    r: '®',
-    s: '5',
-    t: '†',
-    u: 'µ',
-    v: '|/',
-    w: 'v²',
-    x: '><',
-    y: '¥',
-    z: '2'
+    a: '4',  b: '8', c: '©', d: '|)', e: '3',  f: 'ƒ',
+    g: '9',  h: '#', i: '!', j: '_]', k: '|<', l: '1',
+    m: '^^', n: 'ท', o: 'Ø', p: '|^', q: '&',  r: '®',
+    s: '5',  t: '†', u: 'µ', v: '|/', w: 'v²', x: '><',
+    y: '¥',  z: '2'
 };
 
 /**
  * Leet numbers mapping for encoding and decoding.
  */
 const leetNumbers = {
-    0: 'O',
-    1: 'I',
-    2: 'Z',
-    3: 'E',
-    4: 'A',
-    5: 'S',
-    6: 'G',
-    7: 'T',
-    8: 'B',
-    9: 'Q'
+    0: 'O', 1: 'I', 2: 'Z', 3: 'E', 4: 'A',
+    5: 'S', 6: 'G', 7: 'T', 8: 'B', 9: 'Q'
 };
 
-program.name('Leet-Speak-CLI').description('CLI tool to encode and decode Pseudo-Leet-Speak').version('0.0.1');
+program.name('Leet-Speak-CLI')
+    .description('CLI tool to encode and decode Pseudo-Leet-Speak')
+    .version('0.0.1');
 
 /**
  * Encodes a string into Pseudo-Leet-Speak.
