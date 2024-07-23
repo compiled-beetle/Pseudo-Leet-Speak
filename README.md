@@ -33,7 +33,7 @@ npm start -- -d -s "<leet_string>"
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Panagram Test
+## Testing
 
 Encoding:
 
